@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:feet_locker/app_drawer.dart';
-import 'package:feet_locker/add_product_page.dart';
 
 class ItemHomepage {
   final String name;
@@ -54,18 +53,12 @@ class ItemCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         onTap: () {
           if (item.name == "Create Product") {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const AddProductPage(),
-              ),
-            );
+            // Konsisten pakai named route
+            Navigator.pushNamed(context, '/add-product');
           } else {
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
-              ..showSnackBar(
-                SnackBar(content: Text(item.snackMessage)),
-              );
+              ..showSnackBar(SnackBar(content: Text(item.snackMessage)));
           }
         },
         child: Container(
@@ -104,19 +97,19 @@ class MyHomePage extends StatelessWidget {
     ItemHomepage(
       name: "All Products",
       icon: Icons.sports_soccer,
-      color: Colors.black,          
+      color: Colors.black,
       snackMessage: "Kamu telah menekan tombol All Products",
     ),
     ItemHomepage(
       name: "My Products",
       icon: Icons.inventory_2,
-      color: Colors.black87,      
+      color: Colors.black87,
       snackMessage: "Kamu telah menekan tombol My Products",
     ),
     ItemHomepage(
       name: "Create Product",
       icon: Icons.add_box,
-      color: Colors.black54,       
+      color: Colors.black54,
       snackMessage: "Menuju halaman tambah produk baru",
     ),
   ];
@@ -138,6 +131,7 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            // Baris info
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -159,8 +153,20 @@ class MyHomePage extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 12.0),
 
+            // Tombol "Tambah Produk" sesuai rubric
+            const SizedBox(height: 12),
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton.icon(
+                onPressed: () => Navigator.pushNamed(context, '/add-product'),
+                icon: const Icon(Icons.add),
+                label: const Text('Tambah Produk'),
+              ),
+            ),
+            const SizedBox(height: 12),
+
+            // Grid menu
             Expanded(
               child: GridView.count(
                 padding: const EdgeInsets.all(12),
