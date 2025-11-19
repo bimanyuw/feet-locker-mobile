@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:feet_locker/app_drawer.dart';
+import 'package:feet_locker/widgets/app_drawer.dart';
 
 class AddProductPage extends StatefulWidget {
   const AddProductPage({super.key});
